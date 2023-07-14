@@ -1,10 +1,11 @@
 import {Sprite, useTick} from "@pixi/react";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {EventSystem} from "@pixi/events";
+import InfoCard from "../InfoCard";
 
 let i = 0;
 
-const LocationPoint = ({x, y}) => {
+const LocationPoint = ({setShowCard, id, x, y, showCard}) => {
 
     const [delY, setDelY] = useState(0);
 
@@ -15,14 +16,15 @@ const LocationPoint = ({x, y}) => {
 
     return(
         <Sprite
+            id="sprite"
             image="./location.png"
-            scale={{x: 0.035 + scale, y: 0.05 + scale}}
-            x={x}
-            y={y + delY}
+            scale={{x: 0.035, y: 0.05}}
+            x={window.innerWidth * x}
+            y={(window.innerHeight * y) + delY}
             anchor={{ x: 0.5, y: 0.5 }}
             eventMode="static"
             interactive={true}
-            onmouseover={() => {console.log("HIII")}}
+            pointerdown={() => {setShowCard(id)}}
         />
     )
 }
